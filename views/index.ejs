@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Registered Students</h1>
+
+  <ul>
+    <% students.forEach(student => { %>
+      <li>
+        <strong><%= student.name %></strong> — <%= student.course %>  
+        <br>
+        <small><%= student.email %></small>
+        <br>
+        <em>Registered on: <%= student.registrationDate.toDateString() %></em>
+      </li>
+    <% }) %>
+  </ul>
+
+  <div style="text-align:center;">
+    <a href="/register">
+      <button>Register New Student</button>
+    </a>
+  </div>
+</body>
+</html>
