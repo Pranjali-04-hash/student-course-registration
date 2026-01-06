@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: student-course-app
+  template:
+    metadata:
+      labels:
+        app: student-course-app
+    spec:
+      containers:
+      - name: course-reg-container
+        image: mutagekar/student-course-registration:latest
+        imagePullPolicy: Always
+
+        ports:
+        - containerPort: 3000 # Updated to match your Docker output
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: student-course-registration-service
+spec:
+  selector:
+    app: student-course-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000 # Updated to match your containerPort
+  type: NodePort

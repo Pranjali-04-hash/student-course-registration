@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+
+  # ==========================
+  # PROMETHEUS SELF MONITORING
+  # ==========================
+  - job_name: "prometheus"
+    static_configs:
+      - targets:
+          - "localhost:9090"
+
+  # ==========================
+  # NODE.JS APPLICATION METRICS (KUBERNETES)
+  # ==========================
+  - job_name: "student-course-app"
+    metrics_path: /metrics   # change to /actuator/prometheus if needed
+    static_configs:
+      - targets:
+          - "student-course-registration-service.default.svc.cluster.local:80"
